@@ -37,3 +37,12 @@ admin.add_model_view(MavzularAdmin)
 admin.add_model_view(UsersAdmin)
 admin.add_model_view(AboutAdmin)
 admin.add_model_view(NewsAdmin)
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["*"],
+)
