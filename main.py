@@ -15,6 +15,8 @@ from routers.fanlar import routers_fan
 from routers.about import routers_about
 from routers.mavzular import routers_mavzu
 from db import Base
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
 

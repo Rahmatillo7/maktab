@@ -62,3 +62,4 @@ def rasm_qushish(ident: int,file: UploadFile,db: Session = Depends(database),
     db.commit()
     return {"message": "Rasm qo‘shildi!"}
 
+
