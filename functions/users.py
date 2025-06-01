@@ -16,23 +16,23 @@ def user_post(form,db):
     return {"Message": "Users qushildi !!! "}
 
 
-def oqtuvchi_post(form,db,current_user):
-
-    if current_user.role =='oqituvchi':
+def oqtuvchi_post(form, db, current_user):
+    if current_user.role == 'admin':
         new = Users(
             name=form.name,
             username=form.username,
             password=get_password_hash(form.password),
             address=form.address,
-            number = form.number,
+            number=form.number,
             email=form.email,
-            role='oqtuvchi'
+            role='oqituvchi'
         )
         db.add(new)
         db.commit()
-        return {"Message": "Users qushildi !!! "}
+        return {"Message": "O'qituvchi muvaffaqiyatli qo'shildi!"}
     else:
-        raise HTTPException(404,"Siz admin emsiz !!! ")
+        raise HTTPException(404, "Siz admin emassiz!")
+
 
 
 def user_put(ident,form,db,current_user):

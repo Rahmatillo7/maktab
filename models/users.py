@@ -12,5 +12,5 @@ class Users(Base):
     token = Column(String(255),nullable=True)
     address = Column(String(255),nullable=False)
     number = Column(Integer,nullable=False)
-    email = Column(String(255),nullable=False)
+    email = Column(String(255),nullable=True)
     role = Column(String(255),nullable=False)

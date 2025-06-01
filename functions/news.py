@@ -41,5 +41,5 @@ def news_delete(ident,db,current_user):
         db.commit()
         return {"Message": "News uchirlidi !!! "}
     else:
-        raise HTTPException(404,"Siz admin emasz !!! ")
+        raise HTTPException  (404,"Siz admin emasz !!! ")
 
