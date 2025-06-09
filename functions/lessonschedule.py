@@ -1,25 +1,27 @@
+from calendar import day_name
+
 from fastapi import HTTPException
 from models.lessonschedule import Lessonschedule
 
-def lesson_post(form,db, current_user):
+def lesson_post(form, db, current_user):
 
     if current_user.role == 'admin':
         new = Lessonschedule(
             name = form.name,
             room = form.room,
             teacher = form.teacher,
-            time = form.time,
-            duration = form.duration,
             status = form.status,
-            start_time = form.start_time,
-            access_time = form.access_time,
-            notes = form.notes
+            day_name = form.day_name,
+            lesson_date = form.lesson_date,
+            start_time = form.start_time
         )
         db.add(new)
         db.commit()
         return {"Message": "Lesseons qoshildi !!! "}
     else:
         raise HTTPException(400, "Siz admin emassiz!")
+
+
 
 def lessson_put(ident,form,db,current_user):
     put = db.query(Lessonschedule).filter(Lessonschedule.id == ident).first()
@@ -30,21 +32,21 @@ def lessson_put(ident,form,db,current_user):
             Lessonschedule.name : form.name,
             Lessonschedule.room : form.room,
             Lessonschedule.teacher : form.teacher,
-            Lessonschedule.time : form.time,
-            Lessonschedule.duration : form.duration,
             Lessonschedule.status : form.status,
-            Lessonschedule.start_time : form.start_time,
-            Lessonschedule.access_time : form.access_time,
-            Lessonschedule.notes : form.notes
+            Lessonschedule.day_name : form.day_name,
+            Lessonschedule.lesson_date : form.lesson_date,
+            Lessonschedule.start_time : form.start_time
         })
         db.commit()
         return {"Message": "Lesson yangilandi !!! "}
     else:
         raise HTTPException(404,"Siz admin emasiz 😔")
 
+
+
 def lesson_delete(ident,db,current_user):
-    delete = db.query(Lessonschedule).filter(Lessonschedule.id == ident).filter()
-    if not delete:
+    delet = db.query(Lessonschedule).filter(Lessonschedule.id == ident).filter()
+    if not delet:
         raise HTTPException(404, "Bunday id li mavjud emas")
 
     if current_user.role == 'admin':

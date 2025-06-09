@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date
+from sqlalchemy import Column, Integer, String
 from db import Base
 
 class Lessonschedule(Base):
@@ -9,11 +9,7 @@ class Lessonschedule(Base):
     name = Column(String(255), nullable=False)
     room = Column(String(255), nullable=False)
     teacher = Column(String(255), nullable=False)
-    time = Column(Date, nullable=False)
-    start_time = Column(Date, nullable=False)
-    duration = Column(Integer, nullable=False)
     status = Column(String(255), nullable=False)
-    notes = Column(String(255), nullable=True)
-    access_time = Column(Date, nullable=True)
-
-
+    start_time = Column(String(20), nullable=False)
+    day_name = Column(String(20), nullable=False)
+    lesson_date = Column(String(30), nullable=False)
