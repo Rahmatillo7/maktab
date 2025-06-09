@@ -1,4 +1,3 @@
-from http.client import HTTPException
 from models.mavzular import Mavzular
 from fastapi import HTTPException
 

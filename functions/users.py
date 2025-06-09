@@ -121,3 +121,5 @@ def users_delete(ident,db,current_user):
         return {"Message": "Users uchirildi"}
     else:
         raise HTTPException(404,"Siz admin emasz !!! ")
+
+

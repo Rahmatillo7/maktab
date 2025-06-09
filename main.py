@@ -6,9 +6,11 @@ from admin_panel.fanlar import FanlarAdmin
 from routers.news import routers_news
 from admin_panel.about import AboutAdmin
 from admin_panel.mavzular import MavzularAdmin
+from admin_panel.lessonschedule import LessonScheduleAdmin
 from admin_panel.users import UsersAdmin
 from admin_panel.news import NewsAdmin
 from db import engine
+from routers.lessonschedule import routers_lesson
 from admin_panel.login import AdminAuth
 from sqladmin import Admin
 from routers.fanlar import routers_fan
@@ -27,6 +29,7 @@ app.add_middleware(SessionMiddleware, secret_key = SECRET_KEY)
 app.include_router(routers_about)
 app.include_router(routers_mavzu)
 app.include_router(routers_fan)
+app.include_router(routers_lesson)
 app.include_router(login_router)
 app.include_router(routers_users)
 app.include_router(routers_news)
@@ -39,6 +42,7 @@ admin.add_model_view(MavzularAdmin)
 admin.add_model_view(UsersAdmin)
 admin.add_model_view(AboutAdmin)
 admin.add_model_view(NewsAdmin)
+admin.add_model_view(LessonScheduleAdmin)
 
 
 app.add_middleware(
@@ -48,3 +52,6 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
 )
+
+
+
