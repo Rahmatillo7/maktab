@@ -1,5 +1,3 @@
-from calendar import day_name
-
 from fastapi import HTTPException
 from models.lessonschedule import Lessonschedule
 
@@ -23,24 +21,27 @@ def lesson_post(form, db, current_user):
 
 
 
-def lessson_put(ident,form,db,current_user):
-    put = db.query(Lessonschedule).filter(Lessonschedule.id == ident).first()
-    if not put:
-        raise HTTPException(404, "Bunday id li mavjud emas !!! ")
+def lessson_put(ident, form, db, current_user):
+
+    pov = db.query(Lessonschedule).filter(Lessonschedule.id == ident).first()
+    if not pov:
+        raise HTTPException(404, "Bunday id li dars mavjud emas!")
+
     if current_user.role == 'admin':
         db.query(Lessonschedule).filter(Lessonschedule.id == ident).update({
-            Lessonschedule.name : form.name,
-            Lessonschedule.room : form.room,
-            Lessonschedule.teacher : form.teacher,
-            Lessonschedule.status : form.status,
-            Lessonschedule.day_name : form.day_name,
-            Lessonschedule.lesson_date : form.lesson_date,
-            Lessonschedule.start_time : form.start_time
+            Lessonschedule.name: form.name,
+            Lessonschedule.room: form.room,
+            Lessonschedule.teacher: form.teacher,
+            Lessonschedule.status: form.status,
+            Lessonschedule.day_name: form.day_name,
+            Lessonschedule.lesson_date: form.lesson_date,
+            Lessonschedule.start_time: form.start_time
         })
         db.commit()
-        return {"Message": "Lesson yangilandi !!! "}
+        return {"message": "Dars ma'lumotlari yangilandi ✅"}
     else:
-        raise HTTPException(404,"Siz admin emasiz 😔")
+        raise HTTPException(403, "Sizda bu amalni bajarish huquqi yo'q 😔")
+
 
 
 
@@ -55,3 +56,9 @@ def lesson_delete(ident,db,current_user):
         return {"Message": "Lesson uchirildi !!! "}
     else:
         raise HTTPException(404,"Siz admin emasiz 😔")
+
+
+
+
+
+
