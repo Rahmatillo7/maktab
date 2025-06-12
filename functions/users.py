@@ -9,7 +9,7 @@ def user_post(form,db):
         address=form.address,
         number=form.number,
         email=form.email,
-        role='admin'
+        role='user'
     )
     db.add(new)
     db.commit()

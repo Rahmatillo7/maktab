@@ -2,7 +2,7 @@ from models.about import About
 from fastapi import HTTPException
 
 def post_about(form,db,current_user):
-    if current_user.role != 'admin':
+    if current_user.role == 'admin':
         new = About(
             text = form.text,
             fan_id  = form.fan_id
@@ -20,7 +20,7 @@ def put_yangilash(ident, form, db, current_user):
     if not a:
         raise HTTPException(404, "Siz qidirgan id li mavjud emas !!! ")
 
-    if current_user.role != 'admin':
+    if current_user.role == 'admin':
         db.query(About).filter(About.id == ident).update({
             About.text : form.text,
             About.fan_id : form.fan_id
@@ -37,7 +37,7 @@ def delete_uchirsh(ident,db,current_user):
     if not delete:
         raise HTTPException(404,"Siz qidirgan id li mavjud emas !!! ")
 
-    if current_user.role != 'admin':
+    if current_user.role == 'admin':
         db.query(About).filter(About.id == ident).delete()
         db.commit()
         return {"Message": "Abount uchirildi !!! "}

@@ -4,7 +4,7 @@ from models.news import News
 
 def news_post(form,db,current_user):
 
-    if current_user.role != 'admin':
+    if current_user.role == 'admin':
         new = News(
             text = form.text
         )
@@ -21,7 +21,7 @@ def news_put(ident,form,db,current_user):
     if not a:
         raise HTTPException(404,"Siz qidirgan id li mavjud emas !!! ")
 
-    if current_user.role != 'admin':
+    if current_user.role == 'admin':
         db.query(News).filter(News.id == ident).update({
             News.text : form.text
         })
@@ -36,7 +36,7 @@ def news_delete(ident,db,current_user):
     if not delete:
         raise HTTPException(404,"Siz qidirgan id li mavjud emas !!! ")
 
-    if current_user.role != 'admin':
+    if current_user.role == 'admin':
         db.query(News).filter(News.id == ident).delete()
         db.commit()
         return {"Message": "News uchirlidi !!! "}

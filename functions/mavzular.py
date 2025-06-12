@@ -2,7 +2,7 @@ from models.mavzular import Mavzular
 from fastapi import HTTPException
 
 def post_mavzu(form, db, current_user):
-    if current_user.role != 'admin':
+    if current_user.role == 'admin':
         new = Mavzular(
             name=form.name,
             fan_id = form.fan_id,
@@ -16,7 +16,7 @@ def post_mavzu(form, db, current_user):
 
 
 def put_mavzu(ident,form,db,current_user):
-    if current_user.role != 'admin':
+    if current_user.role == 'admin':
         db.query(Mavzular).filter(Mavzular.id == ident).update({
             Mavzular.name : form.name,
             Mavzular.fan_id : form.fan_id,
@@ -28,7 +28,7 @@ def put_mavzu(ident,form,db,current_user):
         raise HTTPException(404,"Siz admin emasz !!! ")
 
 def delete_mavzu(ident,db,current_user):
-    if current_user.role !='admin':
+    if current_user.role =='admin':
         db.query(Mavzular).filter(Mavzular.id == ident).delete()
         db.commit()
         return {"Message": "Mavzular uchirldi !!! "}
