@@ -19,7 +19,6 @@ from routers.mavzular import routers_mavzu
 from db import Base
 from fastapi.middleware.cors import CORSMiddleware
 
-
 app = FastAPI()
 
 Base.metadata.create_all(bind=engine)
