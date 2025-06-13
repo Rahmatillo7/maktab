@@ -105,10 +105,12 @@ async def refresh_token(
     db: Session = Depends(database),
     token: str = None
 ):
+
     user = db.query(Users).where(Users.token == token).first()
     if user is None:
         raise HTTPException(
             status_code=400,
             detail="Token error",
         )
+
 

@@ -1,4 +1,4 @@
-from fastapi import APIRouter,Depends,HTTPException
+from fastapi import APIRouter,Depends,HTTPException,Request
 from sqlalchemy.orm import Session
 from db import database
 from schema.users import CreateUsers,UpdateUsers
@@ -31,6 +31,14 @@ def adminn_post(form: CreateUsers,db: Session = Depends(database),
 def users_yangilash(ident: int ,form: UpdateUsers,db: Session = Depends(database),
                   current_user: Users = Depends(get_current_active_user)):
     return users_put(ident,form,db,current_user)
+
+
+
+@routers_users.post("/admin/login")
+async def login(request: Request, auth_backend=None):
+    if await auth_backend.login(request):
+        return {"message": "Admin login successful"}
+    return {"error": "Invalid admin credentials"}
 
 
 @routers_users.delete('/delete')
