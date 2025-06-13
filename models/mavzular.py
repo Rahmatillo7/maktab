@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, ForeignKey
+from sqlalchemy import Column, String, Integer, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from db import Base
 
@@ -7,7 +7,7 @@ class Mavzular(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(255), nullable=False)
-    text = Column(Integer,nullable=False)
+    text = Column(Text,nullable=False)
 
 
     fan_id = Column(Integer, ForeignKey("fanlar.id"), nullable=False)
