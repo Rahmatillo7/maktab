@@ -16,12 +16,9 @@ from sqladmin import Admin
 from routers.fanlar import routers_fan
 from routers.about import routers_about
 from routers.mavzular import routers_mavzu
-from db import Base
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-
-Base.metadata.create_all(bind=engine)
 
 app.add_middleware(SessionMiddleware, secret_key = SECRET_KEY)
 
